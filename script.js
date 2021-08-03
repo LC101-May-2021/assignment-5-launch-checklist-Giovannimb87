@@ -1,5 +1,9 @@
 // Write your JavaScript code here!
 
+// const { myFetch } = require("./scriptHelper");
+
+// const { formSubmission } = require("./scriptHelper");
+
 // const { addDestinationInfo } = require("./scriptHelper");
 
 // const { pickPlanet } = require("./scriptHelper");
@@ -28,5 +32,10 @@ window.addEventListener("load", function () {
   const form = this.document.querySelector("form");
   form.addEventListener("submit", function (event) {
     event.preventDefault();
+    const pilot = document.querySelector("input[name=pilotName]");
+    const copilot = document.querySelector("input[name=copilotName]");
+    const fuelLevel = document.querySelector("input[name=fuelLevel]");
+    const cargoLevel = document.querySelector("input[name=cargoMass]");
   });
+  formSubmission(window.document);
 });

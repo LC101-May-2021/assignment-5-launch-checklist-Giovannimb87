@@ -25,9 +25,6 @@ function addDestinationInfo(
 }
 
 function validateInput(testInput) {
-  if (!testInput) {
-    return "No Input";
-  }
   if (testInput === "") {
     return "Empty";
   }
@@ -39,14 +36,14 @@ function validateInput(testInput) {
   }
 }
 
-function formSubmission(
-  document,
-  list,
-  pilot,
-  copilot,
-  fuelLevel,
-  cargoLevel
-) {}
+function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
+  const pilotStatus = document.getElementById("pilotStatus");
+  const copilotStatus = document.getElementById("copilotStatus");
+  const fuelLevelStatus = document.getElementById("fuelStatus");
+  const cargoLevelStatus = document.getElementById("cargoStatus");
+  const faultyItems = document.getElementById("faultyItems");
+  const launchStatus = document.getElementById("launchStatus");
+}
 
 async function myFetch() {
   let planetsReturned;
