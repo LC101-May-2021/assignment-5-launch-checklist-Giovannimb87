@@ -24,7 +24,20 @@ function addDestinationInfo(
   `;
 }
 
-function validateInput(testInput) {}
+function validateInput(testInput) {
+  if (!testInput) {
+    return "No Input";
+  }
+  if (testInput === "") {
+    return "Empty";
+  }
+  if (testInput === NaN) {
+    return "Not a Number";
+  }
+  if (testInput === !NaN) {
+    return "Is a Number";
+  }
+}
 
 function formSubmission(
   document,
