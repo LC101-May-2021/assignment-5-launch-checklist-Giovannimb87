@@ -43,6 +43,16 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
   const cargoLevelStatus = document.getElementById("cargoStatus");
   const faultyItems = document.getElementById("faultyItems");
   const launchStatus = document.getElementById("launchStatus");
+  const isMissingValue = [pilot, copilot, cargoLevelStatus, fuelLevelStatus]
+    .map((input) => validateInput(input))
+    .some((check) => check === "Empty");
+
+  if (isMissingValue) {
+    alert("Missing input.");
+  }
+
+  // faultyItems.style.visibility = "visible";
+  // pilotStatus.innerHTML = `${pilot} is ready!`;
 }
 
 async function myFetch() {

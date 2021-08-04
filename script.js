@@ -9,7 +9,6 @@
 // const { pickPlanet } = require("./scriptHelper");
 
 window.addEventListener("load", function () {
-  let listedPlanets;
   // Set listedPlanetsResponse equal to the value returned by calling myFetch()
   let listedPlanetsResponse = myFetch();
   listedPlanetsResponse
@@ -31,11 +30,21 @@ window.addEventListener("load", function () {
     });
   const form = this.document.querySelector("form");
   form.addEventListener("submit", function (event) {
+    // let listedPlanets;
+    const pilot = document.querySelector("input[name=pilotName]").value;
+    const copilot = document.querySelector("input[name=copilotName]").value;
+    const fuelLevel = document.querySelector("input[name=fuelLevel]").value;
+    const cargoLevel = document.querySelector("input[name=cargoMass]").value;
+    const faultyList = document.getElementById("faultyItems");
+
+    formSubmission(
+      window.document,
+      faultyList,
+      pilot,
+      copilot,
+      fuelLevel,
+      cargoLevel
+    );
     event.preventDefault();
-    const pilot = document.querySelector("input[name=pilotName]");
-    const copilot = document.querySelector("input[name=copilotName]");
-    const fuelLevel = document.querySelector("input[name=fuelLevel]");
-    const cargoLevel = document.querySelector("input[name=cargoMass]");
   });
-  formSubmission(window.document);
 });
