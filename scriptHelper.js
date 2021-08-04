@@ -28,10 +28,10 @@ function validateInput(testInput) {
   if (testInput === "") {
     return "Empty";
   }
-  if (testInput === NaN) {
+  if (isNaN(testInput) === true) {
     return "Not a Number";
   }
-  if (testInput === !NaN) {
+  if (isNaN(testInput) === false) {
     return "Is a Number";
   }
 }
@@ -43,16 +43,47 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
   const cargoLevelStatus = document.getElementById("cargoStatus");
   const faultyItems = document.getElementById("faultyItems");
   const launchStatus = document.getElementById("launchStatus");
-  const isMissingValue = [pilot, copilot, cargoLevelStatus, fuelLevelStatus]
+  const isMissingValue = [pilot, copilot, cargoLevel, fuelLevel]
     .map((input) => validateInput(input))
     .some((check) => check === "Empty");
+  const isFuelLevelSufficient = fuelLevel >= 10000;
+  const isCargoLevelSufficient = cargoLevel < 10000;
 
   if (isMissingValue) {
     alert("Missing input.");
   }
+  if (!isMissingValue) {
+    if (
+      validateInput(pilot) === "Is a Number" ||
+      validateInput(copilot) === "Is a Number"
+    ) {
+      alert("Check Pilot and Co-Pilot field for proper input.");
+    }
+    if (
+      validateInput(fuelLevel) === "Not a Number" ||
+      validateInput(cargoLevel) === "Not a Number"
+    ) {
+      alert("Check Fuel Level and Cargo Mass for proper input. ");
+    }
+    pilotStatus.innerHTML = `Pilot ${pilot} is ready`;
+    copilotStatus.innerHTML = `Co-Pilot ${copilot} is ready`;
+    faultyItems.style.visibility = "visible";
 
-  // faultyItems.style.visibility = "visible";
-  // pilotStatus.innerHTML = `${pilot} is ready!`;
+    if (!isFuelLevelSufficient) {
+      launchStatus.innerHTML = "Shuttle is not ready for launch.";
+      launchStatus.style.color = "rgb(199, 37, 78)";
+      fuelLevelStatus.innerHTML = `Insufficient fuel level for journey`;
+    }
+    if (!isCargoLevelSufficient) {
+      launchStatus.innerHTML = "Shuttle is not ready for launch.";
+      launchStatus.style.color = "rgb(199, 37, 78)";
+      cargoLevelStatus.innerHTML = `The spaceship is over-encumbered`;
+    }
+    if (!isMissingValue && isFuelLevelSufficient && isCargoLevelSufficient) {
+      launchStatus.innerHTML = "Shuttle is ready for launch.";
+      launchStatus.style.color = "rgb(65, 159, 106)";
+    }
+  }
 }
 
 async function myFetch() {
